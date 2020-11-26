@@ -1,0 +1,19 @@
+.top-image {
+    width: inherit;
+    height: auto;
+}
+
+body {
+    width: 1400px;
+    margin: auto;
+}
+
+.card-body {
+    height: 300px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    height: 75%;
+    width: 100px;
+}
