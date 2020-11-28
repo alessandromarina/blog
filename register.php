@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
 		$msg = "The passcode is different!";
 	else {
 		$hash = password_hash($passcode, PASSWORD_BCRYPT);
-		$con->query("INSERT INTO user (username ,firstname, lastname, email, passcode) VALUES ('$username','$firstname','$lastname','$email','$hash')");
+		$con->query("INSERT INTO user (image, username ,firstname, lastname, email, passcode) VALUES ('','$username','$firstname','$lastname','$email','$hash')");
 		session_start();
 		$_SESSION['username'] = $username;
 		header('location: index.php');
