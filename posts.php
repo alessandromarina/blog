@@ -3,37 +3,51 @@
 
 <head>
   <title>Posts</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="posts.css">
 </head>
 
-<?php session_start();
+<?php
+$i = $_GET['i'];
+session_start();
 if (isset($_SESSION['username']))
-  include_once 'headerses.php';
+  include_once 'template\headerses.php';
 else
-  include_once 'header.php';
+  include_once 'template\header.php';
 ?>
 
 <body>
-
+  <br>
   <?php
   $con = new mysqli('localhost', 'root', 'banana', 'blog');
-  $sql = "SELECT * FROM post ORDER BY date, image";
+  $sql = "SELECT * FROM post ORDER BY date, image DESC LIMIT " . $i . ",10";
   if ($result = mysqli_query($con, $sql))
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0)
       while ($row = mysqli_fetch_array($result)) {
-        echo "<br>";
         if ($row['image'] != '')
-          echo "<div class='withimage'><div class='img'>" . $row['image'] . "</div> <div class='titledesc'><a href='post.php?idpost=" . $row['id_post'] . "'><h4>" . $row['title'] . "</h4></a>" . $row['description'] . "</div></div>";
+          echo "<div class='withimage'><div class='img'>" . $row['image'] . "</div> <div class='titledesc'><a href='post?idpost=" . $row['id_post'] . "'><h4><div class='title'>&nbsp" . $row['title'] . "</div></h4></a><div class='descimg'>" . $row['description'] . "</div></div></div>";
         else
-          echo "<div class='noimg'><div class='titlenoimg'><a href='post.php?idpost=" . $row['id_post'] . "'><h4>" . $row['title'] . "</h4></a></div><div class='descnoimg'>" . $row['description'] . "</div></div>";
+          echo "<div class='noimg'><div class='titlenoimg'><a href='post?idpost=" . $row['id_post'] . "'><div class='title'><h4>&nbsp" . $row['title'] . "</h4></a></div></div><div class='descnoimg'>" . $row['description'] . "</div></div>";
       }
-    }
-
   ?>
+  <div class=" nextprev ">
+    <form method="post" action="subtp.php?i=<?php if ($i > 0)
+                                              $i -= 10;
+                                            echo $i; ?>">
+      <input required class="btn  buttonprev " name="submitn" type="submit" value="Previous Page">
+    </form>
+    <form method="post" action="subtn.php?i=<?php
+                                            $j = 0;
+                                            $sql = "SELECT * FROM post";
+                                            if ($result = mysqli_query($con, $sql))
+                                              if (mysqli_num_rows($result) > 0)
+                                                while ($row = mysqli_fetch_array($result))
+                                                  $j++;
+                                            if ($i + 9 < $j)
+                                              $i += 10;
 
+                                            echo $i; ?>"> <input required class="btn float-right " name="submitp" type="submit" value="Next Page"></form>
+
+  </div>
 </body>
 
 </html>

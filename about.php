@@ -9,11 +9,12 @@
   <title>Posts</title>
 </head>
 
-<?php session_start();
+<?php
+session_start();
 if (isset($_SESSION['username']))
-  include_once 'headerses.php';
+  include_once 'template\headerses.php';
 else
-  include_once 'header.php';
+  include_once 'template\header.php';
 ?>
 
 <body>

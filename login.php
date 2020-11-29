@@ -7,14 +7,17 @@ if (isset($_POST['submit'])) {
 
 	$emailusername = $con->real_escape_string($_POST['emailusername']);
 	$passcode = $con->real_escape_string($_POST['passcode']);
-
+	$sql = $con->query("SELECT * FROM user WHERE username='$emailusername' OR email='$emailusername'");
+	while ($row = $sql->fetch_assoc()) {
+		session_start();
+		$_SESSION['username'] = ($row['username']);
+	}
 	$sql = $con->query("SELECT id_user, passcode FROM user WHERE email='$emailusername' OR username='$emailusername'");
 	if ($sql->num_rows > 0) {
 		$data = $sql->fetch_array();
 		if (password_verify($passcode, $data['passcode'])) {
-			session_start();
-			$_SESSION['username'] = $emailusername;
-			header('location: index.php');
+			$_SESSION['id'] = $data['id_user'];
+			header('location: index');
 		} else
 			$msg = "Please check your inputs!";
 	} else
@@ -26,12 +29,8 @@ if (isset($_POST['submit'])) {
 
 <head>
 	<title>Log In</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
-<?php include_once 'header.php'; ?>
+<?php include_once 'template\header.php'; ?>
 
 <body>
 	<div class="modal-dialog">
@@ -47,8 +46,8 @@ if (isset($_POST['submit'])) {
 						<?php if ($msg != "") echo $msg; ?>
 						<br>
 						<form method="post" action="login.php">
-							<input class="form-control" minlength="3" name="emailusername" type="email username" placeholder="Email/Username..."><br>
-							<input class="form-control" minlength="8" name="passcode" type="password" placeholder="Password..."><br>
+							<input required class="form-control" minlength="3" name="emailusername" type="email username" placeholder="Email/Username..."><br>
+							<input required class="form-control" minlength="8" name="passcode" type="password" placeholder="Password..."><br>
 							<input class="btn btn-primary" name="submit" type="submit" value="Log In"><br>
 						</form>
 						<br>
