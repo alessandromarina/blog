@@ -1,0 +1,45 @@
+.top-image {
+    width: inherit;
+    height: auto;
+}
+
+body {
+    width: 1200px;
+    margin: auto;
+}
+
+.card-body {
+    height: 300px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    height: 75%;
+    width: 100px;
+}
+
+.desc {
+    float: left;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(31, 31, 31, 0.5);
+    background-color: transparent;
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.propic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+#chartbutton {
+    margin-bottom: 10px;
+}

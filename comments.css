@@ -1,0 +1,25 @@
+.createcomment {
+    display: block;
+}
+
+.name {
+    display: inline-block;
+}
+
+.email {
+    display: inline-block;
+    position: absolute;
+}
+
+.comment {
+    width: 1200px;
+}
+
+.submitbtn {
+    display: inline-block;
+    position: absolute;
+}
+
+.likebtn {
+    display: inline-block;
+}

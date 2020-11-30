@@ -1,0 +1,49 @@
+.noimg {
+    width: 1200px;
+    margin-bottom: 10px;
+}
+
+.withimage {
+    width: 1200px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.img {
+    margin: auto;
+    max-width: 1200px;
+}
+
+.titlenoimg {
+    color: rgba(31, 31, 31, 0.5);
+}
+
+.titledesc {
+    color: rgba(31, 31, 31, 0.5);
+}
+
+.bord {
+    border-bottom: 1px solid gray;
+}
+
+.descnoimg {
+    width: 1200px;
+    padding-left: 5px;
+}
+
+.descimg {
+    padding-left: 5px;
+}
+
+h4,
+h6 {
+    color: rgba(43, 42, 42, 0.5);
+}
+
+.title {
+    border-bottom: 1px solid gray;
+}
+
+.imm {
+    max-width: 1200px;
+}
