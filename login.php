@@ -11,12 +11,13 @@ if (isset($_POST['submit'])) {
 	while ($row = $sql->fetch_assoc()) {
 		session_start();
 		$_SESSION['username'] = ($row['username']);
+		$_SESSION['email'] = ($row['email']);
 	}
 	$sql = $con->query("SELECT id_user, passcode FROM user WHERE email='$emailusername' OR username='$emailusername'");
 	if ($sql->num_rows > 0) {
 		$data = $sql->fetch_array();
 		if (password_verify($passcode, $data['passcode'])) {
-			$_SESSION['id'] = $data['id_user'];
+		
 			header('location: index');
 		} else
 			$msg = "Please check your inputs!";

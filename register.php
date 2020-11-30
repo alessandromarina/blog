@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $username = $con->real_escape_string($_POST['username']);
     $passcode = $con->real_escape_string($_POST['passcode']);
     $cpasscode = $con->real_escape_string($_POST['cpasscode']);
-    $uploadDir = 'propics/';
+    $directory = 'propics/';
 
     $sql = $con->query("SELECT * FROM user WHERE email='" . $_POST['email'] . "'");
     while ($row = $sql->fetch_assoc()) {
@@ -27,9 +27,9 @@ if (isset($_POST['submit'])) {
         }
     }
     if (UPLOAD_ERR_OK === $_FILES['file']['error']) {
-        $fileName = basename($_FILES['file']['name']);
-        move_uploaded_file($_FILES['file']['tmp_name'], $uploadDir . DIRECTORY_SEPARATOR . $fileName);
-        $avatar_path = $uploadDir . DIRECTORY_SEPARATOR . $fileName;
+        $filename = basename($_FILES['file']['name']);
+        move_uploaded_file($_FILES['file']['tmp_name'], $directory . DIRECTORY_SEPARATOR . $filename);
+        $avatar_path = $directory . DIRECTORY_SEPARATOR . $filename;
         if ($passcode == $cpasscode && $ok == true) {
             move_uploaded_file($_FILES['img']['tmp_name'], $directory);
             $hash = password_hash($passcode, PASSWORD_BCRYPT);
@@ -38,6 +38,7 @@ if (isset($_POST['submit'])) {
             echo $var;
             session_start();
             $_SESSION['username'] = $username;
+			$_SESSION['email'] = $email;
             header('location: index');
         } else if ($passcode != $cpasscode) $msg = "The passcode is different!";
     }
@@ -67,15 +68,15 @@ if (isset($_POST['submit'])) {
                         $msg = "";
                         $ok = true; ?>
                         <br>
-                        <form method="post" action="register.php">
-
+                        <form method="post" action="register.php" enctype="multipart/form-data">
                             <input required class="form-control" minlength="1" name="firstname" placeholder="Firstname..."><br>
                             <input required class="form-control" minlength="1" name="lastname" type="lastname" placeholder="Lastname..."><br>
                             <input required class="form-control" minlength="3" name="username" type="username" placeholder="Username..."><br>
                             <input required class="form-control" minlength="6" name="email" type="email" placeholder="Email..."><br>
                             <input required class="form-control" minlength="8" name="passcode" type="password" placeholder="Password..."><br>
                             <input required class="form-control" minlength="8" name="cpasscode" type="password" placeholder="Confirm Password..."><br>
-                            <input required type="file" name="img[]"><br><br>
+                            Select a profile picture:
+                            <input required type="file" name="file"><br><br>
                             <input required class="btn btn-primary" name="submit" type="submit" value="Register!"><br>
                         </form>
                         <br>
