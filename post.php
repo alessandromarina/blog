@@ -32,7 +32,7 @@ else
             while ($row = mysqli_fetch_array($result)) {
                 echo "<div class='bord'></div>";
                 if ($row['fk_id_user'] != '')
-                    echo "<div class='commwithimage'><a href='profile.php?idprofile=" . $row['fk_id_user'] . "'><h6>" . $row['user'] . "</h6></a>" . $row['description'] . "</div>";
+                    echo "<div class='commwithimage'><a href='profile.php?iduser=" . $row['fk_id_user'] . "'><h6>" . $row['user'] . "</h6></a>" . $row['description'] . "</div>";
                 else
                     echo "<div class='commwithimage'> <div class='commtitledesc'><h6>" . $row['user'] . "</h6>" . $row['description'] . "</div></div>";
             }
