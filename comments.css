@@ -1,3 +1,6 @@
 .bord {
     border-bottom: 1px solid gray;
 }
+.comment {
+    width: 1200px;
+}
