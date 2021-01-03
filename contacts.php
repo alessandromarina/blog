@@ -6,11 +6,7 @@
 </head>
 
 <?php
-session_start();
-if (isset($_SESSION['username']))
-    include_once 'template\headerses.php';
-else
-    include_once 'template\header.php';
+include_once 'template\header.php';
 ?>
 
 <body>

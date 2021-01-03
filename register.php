@@ -1,30 +1,26 @@
 <?php
+include_once 'template\header.php';
 $msg = "";
 $ok = true;
 if (isset($_POST['submit'])) {
-    $con = new mysqli('localhost', 'root', 'banana', 'blog');
-
-    $firstname = $con->real_escape_string($_POST['firstname']);
-    $lastname = $con->real_escape_string($_POST['lastname']);
-    $email = $con->real_escape_string($_POST['email']);
-    $username = $con->real_escape_string($_POST['username']);
-    $passcode = $con->real_escape_string($_POST['passcode']);
-    $cpasscode = $con->real_escape_string($_POST['cpasscode']);
+    $firstname = RealEscape($_POST['firstname']);
+    $lastname = RealEscape($_POST['lastname']);
+    $email = RealEscape($_POST['email']);
+    $username = RealEscape($_POST['username']);
+    $passcode = RealEscape($_POST['passcode']);
+    $cpasscode = RealEscape($_POST['cpasscode']);
     $directory = 'propics/';
-
-    $sql = $con->query("SELECT * FROM user WHERE email='" . $_POST['email'] . "'");
-    while ($row = $sql->fetch_assoc()) {
-        if (isset($row['email'])) {
-            $msg = "This email has already been used!";
-            $ok = false;
-        }
+    $sql = SelectUser($email, '*', 2);
+    $row = $sql->fetch_assoc();
+    if (isset($row['email'])) {
+        $msg = "This email has already been used!";
+        $ok = false;
     }
-    $sql = $con->query("SELECT * FROM user WHERE username='" . $_POST['username'] . "'");
-    while ($row = $sql->fetch_assoc()) {
-        if (isset($row['username'])) {
-            $msg = "This username has already been used!";
-            $ok = false;
-        }
+    $sql = SelectUser($username, '*', 1);
+    $row = $sql->fetch_assoc();
+    if (isset($row['username'])) {
+        $msg = "This username has already been used!";
+        $ok = false;
     }
     if (UPLOAD_ERR_OK === $_FILES['file']['error']) {
         $filename = basename($_FILES['file']['name']);
@@ -33,12 +29,10 @@ if (isset($_POST['submit'])) {
         if ($passcode == $cpasscode && $ok == true) {
             move_uploaded_file($_FILES['img']['tmp_name'], $directory);
             $hash = password_hash($passcode, PASSWORD_BCRYPT);
-            $con->query("INSERT INTO user (image, username ,firstname, lastname, email, passcode) VALUES ('$directory','$username','$firstname','$lastname','$email','$hash')");
-            $var = "INSERT INTO user (image, username ,firstname, lastname, email, passcode) VALUES ('$dir','$username','$firstname','$lastname','$email','$hash')";
-            echo $var;
+            InsertUser($directory, $username, $firstname, $lastname, $email, $hash);
             session_start();
             $_SESSION['username'] = $username;
-			$_SESSION['email'] = $email;
+            $_SESSION['email'] = $email;
             header('location: index');
         } else if ($passcode != $cpasscode) $msg = "The passcode is different!";
     }
@@ -50,20 +44,16 @@ if (isset($_POST['submit'])) {
 <head>
     <title>Register</title>
 </head>
-<?php include_once 'template\header.php'; ?>
 
 <body>
-
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Project Blog</h5>
-
             </div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-md-offset-3" align="center">
-
                         <?php if ($msg != "") echo $msg;
                         $msg = "";
                         $ok = true; ?>
@@ -86,6 +76,5 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 </body>
-
 
 </html>
