@@ -2,16 +2,16 @@
 include_once 'template\header.php';
 $msg = "";
 if (isset($_POST['submit'])) {
-	$emailusername = RealEscape($_POST['emailusername']);
-	$passcode = RealEscape($_POST['passcode']);
-	$sql = SelectUser($emailusername, 'username, email', 0);
+	$emailusername = $_POST['emailusername'];
+	$passcode = $_POST['passcode'];
+	$sql = SelectUser(RealEscape($emailusername), 'username, email', 0);
 	$row = $sql->fetch_assoc();
 	if ($row) {
 		session_start();
-		$_SESSION['username'] = RealEscape($row['username']);
-		$_SESSION['email'] = RealEscape($row['email']);
+		$_SESSION['username'] = $row['username'];
+		$_SESSION['email'] = $row['email'];
 	}
-	$sql = SelectUser($emailusername, 'id_user, passcode', 0);
+	$sql = SelectUser(RealEscape($emailusername), 'id_user, passcode', 0);
 	if ($sql->num_rows > 0) {
 		$data = $sql->fetch_array();
 		if (password_verify($passcode, $data['passcode'])) {

@@ -4,15 +4,15 @@
 include_once 'dal.php';
 if (isset($_POST['submit'])) {
   session_start();
-  $comment = RealEscape($_POST['comment']);
+  $comment = $_POST['comment'];
   $username = $_SESSION['username'];
   $email = $_SESSION['email'];
-  $sql = $con->query("SELECT * FROM user WHERE username='$username'");
+  $sql = SelectUser($username, '*', 1);
   $row = $sql->fetch_assoc();
   if ($row) {
-    $iduser = RealEscape($row['id_user']);
-    $idpost = RealEscape($_GET['idpost']);
-    InsertComment($username, $email, $comment, $iduser, $idpost);
+    $iduser =$row['id_user'];
+    $idpost = $_GET['idpost'];
+    InsertComment( RealEscape($username),  RealEscape($email), RealEscape($comment),  RealEscape($iduser),  RealEscape($idpost));
   }
   header('location: ' . $_SERVER['HTTP_REFERER']);
 }
@@ -33,7 +33,6 @@ if (isset($_POST['submit'])) {
         <input class=" submitbtn" type="submit" name="submit" value="Submit">
       </form>
       <form method="post" action="like.php?idpost=<?php echo $idpost ?>" ;>
-
         <input class=" likebtn float-right" type="submit" name="submit" value="Like">
       </form>
     </div>

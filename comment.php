@@ -2,11 +2,12 @@
 <html lang="en">
 <?php
 if (isset($_POST['submit'])) {
-  $name = RealEscape($_POST['name']);
-  $email = RealEscape($_POST['email']);
-  $comment = RealEscape($_POST['comment']);
-  $idpost = RealEscape($_GET['idpost']);
-  InsertComment($name, $email, $comment, NULL, $idpost);
+  include_once 'dal.php';
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $comment = $_POST['comment'];
+  $idpost = $_GET['idpost'];
+  InsertComment(RealEscape($name),RealEscape($email), RealEscape($comment), NULL, RealEscape($idpost));
   header('location: ' . $_SERVER['HTTP_REFERER']);
 }
 ?>

@@ -1,20 +1,20 @@
 <?php
-$idpost = RealEscape($_GET['idpost']);
+$idpost = $_GET['idpost'];
 $username = $_SESSION['username'];
-$sql = SelectUser($username, 'id_user', 1);
+$sql = SelectUser(RealEscape($username), 'id_user', 1);
 $row = $sql->fetch_assoc();
 if ($row) {
-  $iduser = RealEscape($row['id_user']);
+  $iduser = $row['id_user'];
   echo $iduser;
 }
-$sql = SelectRate($iduser, $idpost);
+$sql = SelectRate(RealEscape($iduser), RealEscape($idpost));
 $row = $sql->fetch_assoc();
 if ($row) {
-  $fkiduser = RealEscape($row['fk_id_user']);
+  $fkiduser =$row['fk_id_user'];
   echo $fkiduser;
 }
 if ($iduser != $fkiduser)
-  InsertLike($iduser, $idpost);
+  InsertLike(RealEscape($iduser), RealEscape($idpost));
 else
-  DeleteLike($iduser, $idpost);
+  DeleteLike(RealEscape($iduser), RealEscape($idpost));
 header('location: ' . $_SERVER['HTTP_REFERER']);

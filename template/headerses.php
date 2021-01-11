@@ -15,8 +15,7 @@
             ?>
         </button>
         <div class="dropdown-menu">
-            <a class="dropdown-item" href="profile?iduser=<?php echo RealEscape($row['id_user']);
-                                                        } ?>">Your Comments</a>
+            <a class="dropdown-item" href="profile?iduser=<?php echo RealEscape($row['id_user']); } ?>">Your Comments</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="logout">Log Out</a>
         </div>

@@ -21,10 +21,10 @@ include_once 'template\header.php';
                 $sql = SelectPost(1001, 0);
                 $row = $sql->fetch_assoc();
                 if ($row) {
-                    $idpost = RealEscape($row['id_post']);
-                    $description = RealEscape($row['description']);
-                    $title = RealEscape($row['title']);
-                    $image = RealEscape($row['image']);
+                   $idpost = $row['id_post'];
+                   $description = $row['description'];
+                     $title = $row['title'];
+                    $image = $row['image'];
                 ?>
                     <div><img src="img/web_image1.jpg" class="d-block w-100" alt="<?php echo $image; ?>"></div>
                     <div class="card-body">
@@ -39,10 +39,10 @@ include_once 'template\header.php';
             $sql = SelectPost(1002, 0);
             $row = $sql->fetch_assoc();
             if ($row) {
-                $idpost = RealEscape($row['id_post']);
-                $description = RealEscape($row['description']);
-                $title = RealEscape($row['title']);
-                $image = RealEscape($row['image']);
+               $idpost = $row['id_post'];
+               $description = $row['description'];
+                 $title = $row['title'];
+                $image = $row['image'];
 
             ?>
                 <div class="carousel-item top-image">
@@ -59,10 +59,10 @@ include_once 'template\header.php';
                 $sql = SelectPost(1002, 0);
                 $row = $sql->fetch_assoc();
                 if ($row) {
-                    $idpost = RealEscape($row['id_post']);
-                    $description = RealEscape($row['description']);
-                    $title = RealEscape($row['title']);
-                    $image = RealEscape($row['image']);
+                   $idpost = $row['id_post'];
+                   $description = $row['description'];
+                     $title = $row['title'];
+                    $image = $row['image'];
                 ?>
                     <div class="carousel-item top-image">
                         <div><img src="<?php echo $image; ?>" class="d-block w-100" alt="<?php echo $image; ?>"></div>

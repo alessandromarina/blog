@@ -3,20 +3,20 @@ include_once 'template\header.php';
 $msg = "";
 $ok = true;
 if (isset($_POST['submit'])) {
-    $firstname = RealEscape($_POST['firstname']);
-    $lastname = RealEscape($_POST['lastname']);
-    $email = RealEscape($_POST['email']);
-    $username = RealEscape($_POST['username']);
-    $passcode = RealEscape($_POST['passcode']);
-    $cpasscode = RealEscape($_POST['cpasscode']);
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $username =$_POST['username'];
+    $passcode = $_POST['passcode'];
+    $cpasscode =$_POST['cpasscode'];
     $directory = 'propics/';
-    $sql = SelectUser($email, '*', 2);
+    $sql = SelectUser(RealEscape($email), '*', 2);
     $row = $sql->fetch_assoc();
     if (isset($row['email'])) {
         $msg = "This email has already been used!";
         $ok = false;
     }
-    $sql = SelectUser($username, '*', 1);
+    $sql = SelectUser(RealEscape($username), '*', 1);
     $row = $sql->fetch_assoc();
     if (isset($row['username'])) {
         $msg = "This username has already been used!";
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         if ($passcode == $cpasscode && $ok == true) {
             move_uploaded_file($_FILES['img']['tmp_name'], $directory);
             $hash = password_hash($passcode, PASSWORD_BCRYPT);
-            InsertUser($directory, $username, $firstname, $lastname, $email, $hash);
+            InsertUser(RealEscape($directory), RealEscape($username), RealEscape($firstname), RealEscape($lastname), RealEscape($email), RealEscape($hash));
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
