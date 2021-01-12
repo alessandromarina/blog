@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <title>Posts</title>
-  <link rel="stylesheet" href="posts.css">
-</head>
 <?php
-include_once 'template\header.php';
+include_once 'assets/template/header.php';
 $i = $_GET['i'];
 ?>
+<head>
+  <title>Posts</title>
+  <link rel="stylesheet" href="assets/posts.css">
+</head>
 
 <body>
-  <br>
+  <br />
   <?php
   $sql = SelectPost(RealEscape($i), 1);
   do {
@@ -28,10 +28,10 @@ $i = $_GET['i'];
 
   ?>
   <div class="nextprev">
-    <form method="post" action="subtp.php?i=<?php echo $i; ?>">
+    <form method="post" action="assets/posts/subtp.php?i=<?php echo urlencode($i); ?>">
       <input required class="btn  buttonprev" name="submitp" type="submit" value="Previous Page">
     </form>
-    <form method="post" action="subtn.php?i=<?php echo $i; ?>">
+    <form method="post" action="assets/posts/subtn.php?i=<?php echo urlencode($i); ?>">
       <input required class="btn float-right" name="submitn" type="submit" value="Next Page">
     </form>
   </div>

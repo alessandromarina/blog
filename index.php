@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
 
+<?php
+include_once 'assets/template/header.php';
+?>
 <head>
     <title>Homepage</title>
-    <link rel="stylesheet" href="posts.css">
+    <link rel="stylesheet" href="assets/posts.css">
 </head>
-<?php
-include_once 'template\header.php';
-?>
 
 <body>
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -18,58 +18,55 @@ include_once 'template\header.php';
             </a>
             <div class="carousel-item active top-image">
                 <?php
-                $sql = SelectPost(1001, 0);
+                $sql = SelectPost(RealEscape(1001), 0);
                 $row = $sql->fetch_assoc();
                 if ($row) {
-                   $idpost = $row['id_post'];
-                   $description = $row['description'];
-                     $title = $row['title'];
+                    $idpost = $row['id_post'];
+                    $description = $row['description'];
+                    $title = $row['title'];
                     $image = $row['image'];
                 ?>
-                    <div><img src="img/web_image1.jpg" class="d-block w-100" alt="<?php echo $image; ?>"></div>
+                    <div><img src="<?php echo htmlspecialchars($image); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($image); ?>"></div>
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $title; ?></h5>
-                        <p class="card-text"><?php echo $description; ?>
-                        </p>
-                        <a href="post.php?idpost=<?php echo $idpost;
+                        <h5 class="card-title"><?phpecho htmlspecialchars($title);?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($description); ?></p>
+                        <a href="post.php?idpost=<?php echo urlencode($idpost);
                                                 } ?>" class="btn btn-primary">Go to post</a>
                     </div>
             </div>
             <?php
-            $sql = SelectPost(1002, 0);
+            $sql = SelectPost(RealEscape(1002), 0);
             $row = $sql->fetch_assoc();
             if ($row) {
-               $idpost = $row['id_post'];
-               $description = $row['description'];
-                 $title = $row['title'];
+                $idpost = $row['id_post'];
+                $description = $row['description'];
+                $title = $row['title'];
                 $image = $row['image'];
-
             ?>
                 <div class="carousel-item top-image">
-                    <div><img src="<?php echo $image; ?>" class="d-block w-100" alt="<?php echo $image; ?>"></div>
-
+                    <div><img src="<?php echo htmlspecialchars($image); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($image); ?>"></div>
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $title; ?></h5>
-                        <p class="card-text"><?php echo $description; ?></p>
-                        <a href="post.php?idpost=<?php echo $idpost;
+                        <h5 class="card-title"><?phpecho htmlspecialchars($title);?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($description); ?></p>
+                        <a href="post.php?idpost=<?php echo urlencode($idpost);
                                                 } ?>" class="btn btn-primary">Go to post</a>
                     </div>
                 </div>
                 <?php
-                $sql = SelectPost(1002, 0);
+                $sql = SelectPost(RealEscape(1003), 0);
                 $row = $sql->fetch_assoc();
                 if ($row) {
-                   $idpost = $row['id_post'];
-                   $description = $row['description'];
-                     $title = $row['title'];
+                    $idpost = $row['id_post'];
+                    $description = $row['description'];
+                    $title = $row['title'];
                     $image = $row['image'];
                 ?>
                     <div class="carousel-item top-image">
-                        <div><img src="<?php echo $image; ?>" class="d-block w-100" alt="<?php echo $image; ?>"></div>
+                        <div><img src="<?php echo htmlspecialchars($image); ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($image); ?>"></div>
                         <div class="card-body">
-                            <h5 class="card-title">Sum</h5>
-                            <p class="card-text"><?php echo $description; ?></p>
-                            <a href="post.php?idpost=<?php echo $idpost;
+                            <h5 class="card-title"><?phpecho htmlspecialchars($title);?></h5>
+                            <p class="card-text"><?php echo htmlspecialchars($description); ?></p>
+                            <a href="post.php?idpost=<?php echo urlencode($idpost);
                                                     } ?>" class="btn btn-primary">Go to post</a>
                         </div>
                     </div>
@@ -83,7 +80,8 @@ include_once 'template\header.php';
         <h1>Popular Posts</h1>
     </nav>
     <?php
-    include_once 'top5posts.php';
+    include_once 'assets/top10posts.php';
+    session_destroy();
     ?>
 </body>
 

@@ -5,7 +5,7 @@
   <title>About</title>
 </head>
 <?php
-include_once 'template\header.php';
+include_once 'assets/template/header.php';
 ?>
 
 <body>

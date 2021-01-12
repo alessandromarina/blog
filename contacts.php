@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
 
+<?php
+include_once 'assets/template/header.php';
+?>
 <head>
     <title>Contacts</title>
 </head>
 
-<?php
-include_once 'template\header.php';
-?>
 
 <body>
     <div class="accordion" id="accordionExample">

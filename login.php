@@ -1,5 +1,5 @@
 <?php
-include_once 'template\header.php';
+include_once 'assets/template/header.php';
 $msg = "";
 if (isset($_POST['submit'])) {
 	$emailusername = $_POST['emailusername'];
@@ -38,14 +38,14 @@ if (isset($_POST['submit'])) {
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-6 col-md-offset-3" align="center">
-						<?php if ($msg != "") echo $msg; ?>
-						<br>
+						<?php if ($msg != "") echo htmlspecialchars($msg); ?>
+						<br />
 						<form method="post" action="login.php">
-							<input required class="form-control" minlength="3" name="emailusername" type="email username" placeholder="Email/Username..."><br>
-							<input required class="form-control" minlength="8" name="passcode" type="password" placeholder="Password..."><br>
-							<input class="btn btn-primary" name="submit" type="submit" value="Log In"><br>
+							<input required class="form-control" minlength="3" name="emailusername" type="email username" placeholder="Email/Username..."><br />
+							<input required class="form-control" minlength="8" name="passcode" type="password" placeholder="Password..."><br />
+							<input class="btn btn-primary" name="submit" type="submit" value="Log In"><br />
 						</form>
-						<br>
+						<br />
 					</div>
 				</div>
 			</div>

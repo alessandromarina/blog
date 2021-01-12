@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en">
 
+<?php
+include_once 'assets/template/header.php';
+?>
 <head>
   <title>Forum</title>
   <link rel="stylesheet" href="comments.css">
 </head>
 
-<?php
-include_once 'template\header.php';
-?>
 
 <body>
   <?php
-  $iduser =$_GET['iduser'];
+  $iduser = $_GET['iduser'];
   $sql = SelectComment(RealEscape($iduser), 1);
   do {
     $row = $sql->fetch_assoc();
