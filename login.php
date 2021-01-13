@@ -4,17 +4,13 @@ $msg = "";
 if (isset($_POST['submit'])) {
 	$emailusername = $_POST['emailusername'];
 	$passcode = $_POST['passcode'];
-	$sql = SelectUser(RealEscape($emailusername), 'username, email', 0);
+	$sql = SelectUser(RealEscape($emailusername), 'id_user, passcode, username, email', 0);
 	$row = $sql->fetch_assoc();
 	if ($row) {
-		session_start();
-		$_SESSION['username'] = $row['username'];
-		$_SESSION['email'] = $row['email'];
-	}
-	$sql = SelectUser(RealEscape($emailusername), 'id_user, passcode', 0);
-	if ($sql->num_rows > 0) {
-		$data = $sql->fetch_array();
-		if (password_verify($passcode, $data['passcode'])) {
+		if (password_verify($passcode, $row['passcode'])) {
+			session_start();
+			$_SESSION['username'] = $row['username'];
+			$_SESSION['email'] = $row['email'];
 			header('location: index');
 		} else
 			$msg = "Please check your inputs!";

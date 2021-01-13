@@ -32,7 +32,7 @@ include_once 'assets/template/header.php';
         } while ($row);
         echo "<div class='bord'></div>";
         if (isset($_SESSION['username']))
-            include_once "assets/posts/commentses.php";
+            include_once "logged/commentses.php";
         else
             include_once "assets/posts/comment.php";
     }

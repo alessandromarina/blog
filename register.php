@@ -10,37 +10,35 @@ if (isset($_POST['submit'])) {
     $passcode = $_POST['passcode'];
     $cpasscode = $_POST['cpasscode'];
     $directory = 'assets/img/propics/';
-    $sql = SelectUser(RealEscape($email), '*', 2);
+    $sql = SelectUser(RealEscape($email), 'email', 2);
     $row = $sql->fetch_assoc();
     if (isset($row['email'])) {
         $msg = "This email has already been used!";
         $ok = false;
+    } else {
+        $sql = SelectUser(RealEscape($username), 'username', 1);
+        $row = $sql->fetch_assoc();
+        if (isset($row['username'])) {
+            $msg = "This username has already been used!";
+            $ok = false;
+        } else if ($passcode == $cpasscode && $ok == true && ctype_alpha($username)) {
+            if (UPLOAD_ERR_OK === $_FILES['file']['error']) {
+                $filename = basename($_FILES['file']['name']);
+                move_uploaded_file($_FILES['file']['tmp_name'], $directory . DIRECTORY_SEPARATOR . $filename);
+                $path = $directory . $filename;
+                move_uploaded_file($_FILES['img']['tmp_name'], $directory);
+            } else
+                $path = 'assets/img/propics/no_img.jpg';
+            $hash = password_hash($passcode, PASSWORD_BCRYPT);
+            InsertUser(RealEscape($path), RealEscape($username), RealEscape($firstname), RealEscape($lastname), RealEscape($email), RealEscape($hash));
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            header('location: index');
+        } else if ($passcode != $cpasscode) $msg = "The passcode is different!";
+        else
+            $msg = "This username has prohibited chars in it";
     }
-    $sql = SelectUser(RealEscape($username), '*', 1);
-    $row = $sql->fetch_assoc();
-    if (isset($row['username'])) {
-        $msg = "This username has already been used!";
-        $ok = false;
-    }
-    if ($passcode == $cpasscode && $ok == true) {
-        if (UPLOAD_ERR_OK === $_FILES['file']['error']) {
-            $filename = basename($_FILES['file']['name']);
-            move_uploaded_file($_FILES['file']['tmp_name'], $directory . DIRECTORY_SEPARATOR . $filename);
-            $path = $directory . $filename;
-            move_uploaded_file($_FILES['img']['tmp_name'], $directory);
-        } else {
-            $filename = basename($_FILES['file']['name']);
-            move_uploaded_file($_FILES['file']['tmp_name'], $directory . DIRECTORY_SEPARATOR . $filename);
-            $path = $directory . $filename;
-            move_uploaded_file($_FILES['img']['tmp_name'], $directory);
-        }
-        $hash = password_hash($passcode, PASSWORD_BCRYPT);
-        InsertUser(RealEscape($path), RealEscape($username), RealEscape($firstname), RealEscape($lastname), RealEscape($email), RealEscape($hash));
-        session_start();
-        $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
-        header('location: index');
-    } else if ($passcode != $cpasscode) $msg = "The passcode is different!";
 }
 ?>
 <!doctype html>

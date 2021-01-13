@@ -81,7 +81,6 @@ include_once 'assets/template/header.php';
     </nav>
     <?php
     include_once 'assets/top10posts.php';
-    session_destroy();
     ?>
 </body>
 
