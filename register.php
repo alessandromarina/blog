@@ -10,12 +10,13 @@ if (isset($_POST['submit'])) {
     $passcode = $_POST['passcode'];
     $cpasscode = $_POST['cpasscode'];
     $directory = 'assets/img/propics/';
-    $row = SelectUser($email, 'email', 2);
+    $sql = SelectUser($email, 2);
+    $row = $sql->fetch_assoc();
     if (isset($row['email'])) {
         $msg = "This email has already been used!";
         $ok = false;
     } else {
-        $sql = SelectUser($username, 'username', 1);
+        $sql = SelectUser($username, 1);
         $row = $sql->fetch_assoc();
         if (isset($row['username'])) {
             $msg = "This username has already been used!";

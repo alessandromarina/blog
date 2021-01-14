@@ -12,6 +12,15 @@ $i = $_GET['i'];
 
 <body>
   <br />
+  <div class="nextprev">
+    <form method="post" action="assets/posts/subtp.php?i=<?php echo urlencode($i); ?>">
+      <input required class="btn buttonprev" name="submitp" type="submit" value="Previous Page">
+    </form>
+    <form method="post" action="assets/posts/subtn.php?i=<?php echo urlencode($i); ?>">
+      <input required class="btn buttonnext float-right" name="submitn" type="submit" value="Next Page">
+    </form>
+  </div>
+  <br /><br />
   <?php
   $sql = SelectPost($i, 1);
   do {
@@ -29,12 +38,13 @@ $i = $_GET['i'];
   ?>
   <div class="nextprev">
     <form method="post" action="assets/posts/subtp.php?i=<?php echo urlencode($i); ?>">
-      <input required class="btn  buttonprev" name="submitp" type="submit" value="Previous Page">
+      <input required class="btn buttonprev" name="submitp" type="submit" value="Previous Page">
     </form>
     <form method="post" action="assets/posts/subtn.php?i=<?php echo urlencode($i); ?>">
-      <input required class="btn float-right" name="submitn" type="submit" value="Next Page">
+      <input required class="btn buttonnext float-right" name="submitn" type="submit" value="Next Page">
     </form>
   </div>
+  <br /><br />
 </body>
 
 </html>
