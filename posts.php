@@ -13,7 +13,7 @@ $i = $_GET['i'];
 <body>
   <br />
   <?php
-  $sql = SelectPost(RealEscape($i), 1);
+  $sql = SelectPost($i, 1);
   do {
     $row = $sql->fetch_assoc();
     if ($row) {

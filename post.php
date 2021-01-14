@@ -12,14 +12,14 @@ include_once 'assets/template/header.php';
 <body>
     <?php
     $idpost = $_GET['idpost'];
-    $sql = SelectPost(RealEscape($idpost), 0);
+    $sql = SelectPost($idpost, 0);
     $row = $sql->fetch_assoc();
     if ($row) {
         if ($row['image'] != '')
             echo "<br /><div class='withimage'><div class='img'><img class='imm' src='" . htmlspecialchars($row['image']) . "'></img></div> <div class='titledesc'><h4><div class='title'>&nbsp" . htmlspecialchars($row['title']) . "</div></h4><div class='descimg'>" . htmlspecialchars($row['description']) . "</div></div></div>";
         else
             echo "<br /><div class='noimg'><div class='titlenoimg'><h4>" . htmlspecialchars($row['title']) . "</h4></div><div class='descnoimg'>" . htmlspecialchars($row['description']) . "</div></div>";
-        $sql = SelectComment(RealEscape($idpost), 0);
+        $sql = SelectComment($idpost, 0);
         do {
             $row = $sql->fetch_assoc();
             if ($row) {

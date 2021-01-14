@@ -18,7 +18,7 @@ include_once 'assets/template/header.php';
             </a>
             <div class="carousel-item active top-image">
                 <?php
-                $sql = SelectPost(RealEscape(1001), 0);
+                $sql = SelectPost(1001, 0);
                 $row = $sql->fetch_assoc();
                 if ($row) {
                     $idpost = $row['id_post'];
@@ -35,7 +35,7 @@ include_once 'assets/template/header.php';
                     </div>
             </div>
             <?php
-            $sql = SelectPost(RealEscape(1002), 0);
+            $sql = SelectPost(1002, 0);
             $row = $sql->fetch_assoc();
             if ($row) {
                 $idpost = $row['id_post'];
@@ -53,7 +53,7 @@ include_once 'assets/template/header.php';
                     </div>
                 </div>
                 <?php
-                $sql = SelectPost(RealEscape(1003), 0);
+                $sql = SelectPost(1003, 0);
                 $row = $sql->fetch_assoc();
                 if ($row) {
                     $idpost = $row['id_post'];

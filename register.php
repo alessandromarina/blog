@@ -10,27 +10,25 @@ if (isset($_POST['submit'])) {
     $passcode = $_POST['passcode'];
     $cpasscode = $_POST['cpasscode'];
     $directory = 'assets/img/propics/';
-    $sql = SelectUser(RealEscape($email), 'email', 2);
-    $row = $sql->fetch_assoc();
+    $row = SelectUser($email, 'email', 2);
     if (isset($row['email'])) {
         $msg = "This email has already been used!";
         $ok = false;
     } else {
-        $sql = SelectUser(RealEscape($username), 'username', 1);
+        $sql = SelectUser($username, 'username', 1);
         $row = $sql->fetch_assoc();
         if (isset($row['username'])) {
             $msg = "This username has already been used!";
             $ok = false;
         } else if ($passcode == $cpasscode && $ok == true && ctype_alpha($username)) {
             if (UPLOAD_ERR_OK === $_FILES['file']['error']) {
-                $filename = basename($_FILES['file']['name']);
-                move_uploaded_file($_FILES['file']['tmp_name'], $directory . DIRECTORY_SEPARATOR . $filename);
-                $path = $directory . $filename;
-                move_uploaded_file($_FILES['img']['tmp_name'], $directory);
+                $ext = pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION);
+                $path =  $directory . $username . "." . $ext;
+                move_uploaded_file($_FILES["file"]["tmp_name"], $path);
             } else
-                $path = 'assets/img/propics/no_img.jpg';
+                $path = $directory . 'im.jpg';
             $hash = password_hash($passcode, PASSWORD_BCRYPT);
-            InsertUser(RealEscape($path), RealEscape($username), RealEscape($firstname), RealEscape($lastname), RealEscape($email), RealEscape($hash));
+            InsertUser($path, $username, $firstname, $lastname, $email, $hash);
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;

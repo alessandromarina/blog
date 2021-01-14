@@ -4,8 +4,7 @@ $msg = "";
 if (isset($_POST['submit'])) {
 	$emailusername = $_POST['emailusername'];
 	$passcode = $_POST['passcode'];
-	$sql = SelectUser(RealEscape($emailusername), 'id_user, passcode, username, email', 0);
-	$row = $sql->fetch_assoc();
+	$row = SelectUser($emailusername, 'id_user, passcode, username, email', 0);
 	if ($row) {
 		if (password_verify($passcode, $row['passcode'])) {
 			session_start();
