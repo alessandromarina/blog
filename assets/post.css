@@ -1,0 +1,110 @@
+.noimg {
+    width: 1200px;
+    margin-bottom: 10px;
+}
+
+.withimage {
+    width: 1200px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.img {
+    margin: auto;
+    max-width: 1200px;
+}
+
+.titlenoimg {
+    color: rgba(31, 31, 31, 0.5);
+}
+
+.descnoimg {
+    width: 1200px;
+    padding-left: 5px;
+}
+
+.descimg {
+    padding-left: 5px;
+}
+
+h4,
+h6 {
+    color: rgba(43, 42, 42, 0.5);
+}
+
+.title {
+    border-bottom: 1px solid gray;
+}
+
+.imm {
+    max-width: 1200px;
+}
+
+.propic-comment {
+    height: 35px;
+    width: auto;
+    border-radius: 50%;
+    border: 0;
+}
+
+.title-comment {
+    display: inline-block;
+    position: solid absolute;
+}
+
+.comment {
+    padding-left: 40px;
+    margin-bottom: 5px;
+}
+
+.title-notreg {
+    padding-left: 15px;
+}
+
+#likebtn {
+    border: 1px solid gray;
+}
+
+.fa {
+    font-size: 25px;
+}
+
+#thumbl:hover {
+    color: darkblue;
+}
+
+#thumb,
+#numl {
+    cursor: context-menu;
+    padding-left: 3px;
+    border: 0;
+}
+
+#thumbl {
+    color: black;
+}
+
+#thumbu:hover {
+    color: black;
+}
+
+#thumbu {
+    color: darkblue;
+}
+
+#thumbu,
+#thumbl {
+    cursor: pointer;
+    user-select: none;
+    padding-left: 3px;
+    border: 0;
+}
+
+#bordmarg {
+    margin-bottom: 10px;
+}
+
+.submitbtn {
+    margin-top: 0px;
+    padding-top: 0px;
+}

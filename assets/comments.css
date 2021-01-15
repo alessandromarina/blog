@@ -1,0 +1,47 @@
+.bord,
+.submitbtn {
+    border-bottom: 1px solid gray;
+}
+
+textarea {
+    resize: none;
+    width: 1157px;
+    display: inline-block;
+    position: absolute;
+    border: 0 none white;
+    overflow: auto;
+    padding-left: 3px;
+    outline: none;
+    font-size: 17px;
+}
+
+.comment-img {
+    height: 45px;
+    width: auto;
+    border-radius: 50%;
+    padding-bottom: 3px;
+    padding-right: 3px;
+}
+
+.submitbtn {
+    margin-top: 5px;
+}
+
+.bord {
+    display: block;
+}
+
+#name,
+#email {
+    width: 250px;
+}
+
+.email {
+    display: inline-block;
+    position: absolute;
+}
+
+.txtcom {
+    padding-left: 0px;
+    width: 1200px;
+}
