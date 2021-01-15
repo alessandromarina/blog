@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
 						<form method="post" action="login.php">
 							<input required class="form-control" minlength="3" name="emailusername" type="email username" placeholder="Email/Username..."><br />
 							<input required class="form-control" minlength="8" name="passcode" type="password" placeholder="Password..."><br />
-							<input class="btn btn-primary" name="submit" type="submit" value="Log In"><br />
+							<input class="btn" name="submit" type="submit" value="Log In"><br />
 						</form>
 						<br />
 					</div>

@@ -32,7 +32,7 @@ include_once 'assets/template/header.php';
                         <h5 class="card-title"><?phpecho htmlspecialchars($title);?></h5>
                         <p class="card-text"><?php echo htmlspecialchars($description); ?></p>
                         <a href="post.php?idpost=<?php echo urlencode($idpost);
-                                                } ?>" class="btn btn-primary">Go to post</a>
+                                                } ?>" class="btn">Go to post</a>
                     </div>
             </div>
             <?php
@@ -50,7 +50,7 @@ include_once 'assets/template/header.php';
                         <h5 class="card-title"><?phpecho htmlspecialchars($title);?></h5>
                         <p class="card-text"><?php echo htmlspecialchars($description); ?></p>
                         <a href="post.php?idpost=<?php echo urlencode($idpost);
-                                                } ?>" class="btn btn-primary">Go to post</a>
+                                                } ?>" class="btn">Go to post</a>
                     </div>
                 </div>
                 <?php
@@ -68,7 +68,7 @@ include_once 'assets/template/header.php';
                             <h5 class="card-title"><?phpecho htmlspecialchars($title);?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($description); ?></p>
                             <a href="post.php?idpost=<?php echo urlencode($idpost);
-                                                    } ?>" class="btn btn-primary">Go to post</a>
+                                                    } ?>" class="btn">Go to post</a>
                         </div>
                     </div>
                     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
